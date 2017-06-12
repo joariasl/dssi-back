@@ -17,8 +17,7 @@ class PropertyTest extends TestCase
 
     public function testCreate()
     {
-        Session::start();
-        $params = ['id'=>'TCO', 'name' => 'Temuco', '_token' => csrf_token()];
+        $params = ['id'=>'TCO', 'name' => 'Temuco'];
         $this->json('POST', $this->baseUrl, $params)
             ->seeStatusCode(201);
     }
@@ -35,8 +34,7 @@ class PropertyTest extends TestCase
 
     public function testUpdate()
     {
-        Session::start();
-        $params = ['name' => 'Temuco2', '_token' => csrf_token()];
+        $params = ['name' => 'Temuco2'];
         $id = 'TCO';
         $this->json('PUT', $this->baseUrl.'/'.$id, $params)
             ->seeStatusCode(200);
@@ -49,10 +47,8 @@ class PropertyTest extends TestCase
 
     public function testDestroy()
     {
-        Session::start();
-        $params = ['_token' => csrf_token()];
         $id = 'TCO';
-        $this->json('DELETE', $this->baseUrl.'/'.$id, $params)
+        $this->json('DELETE', $this->baseUrl.'/'.$id)
             ->seeStatusCode(200);
         $this->json('GET', $this->baseUrl.'/'.$id)
             ->seeStatusCode(404);
