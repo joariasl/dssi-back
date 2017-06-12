@@ -13,9 +13,9 @@ pipelines:
           - composer install
           - php -r "copy('.env.example', '.env');"
           - php artisan key:generate
-          - vendor/bin/phpunit
           - docker-php-ext-install pdo pdo_mysql
           - php artisan migrate
+          - vendor/bin/phpunit
         services:
           - mariadb
 definitions:
