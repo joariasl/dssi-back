@@ -49,7 +49,7 @@ class PropertyTest extends TestCase
     {
         $id = 'TCO';
         $this->json('DELETE', $this->baseUrl.'/'.$id)
-            ->seeStatusCode(200);
+            ->seeStatusCode(204);
         $this->json('GET', $this->baseUrl.'/'.$id)
             ->seeStatusCode(404);
     }
