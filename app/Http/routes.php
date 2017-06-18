@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
+    if (App::environment(['production', 'testing'])) {
+        return redirect('app/');
+    }
+    // Or if locale
     return view('welcome');
 });
