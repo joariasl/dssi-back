@@ -42,7 +42,7 @@ class PropertyController extends Controller
     {
         $property = Property::find($id);
         if($property){
-            return Property::find($id);
+            return $property;
         }else{
             return response()->make(null, 404);
         }
@@ -70,5 +70,6 @@ class PropertyController extends Controller
     public function destroy($id)
     {
         Property::destroy($id);
+        return response()->make(null, 204);
     }
 }

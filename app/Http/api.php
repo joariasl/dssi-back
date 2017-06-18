@@ -11,4 +11,4 @@
 |
 */
 
-Route::resource('property', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+Route::resource('properties', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

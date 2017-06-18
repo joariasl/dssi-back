@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class PropertyTest extends TestCase
 {
-    protected $baseUrl = 'http://localhost/api/property';
+    protected $baseUrl = 'http://localhost/api/properties';
 
     public function testIndex()
     {
@@ -20,6 +20,11 @@ class PropertyTest extends TestCase
         $params = ['id'=>'TCO', 'name' => 'Temuco'];
         $this->json('POST', $this->baseUrl, $params)
             ->seeStatusCode(201);
+        $this->json('GET', $this->baseUrl.'/'.$params['id'])
+            ->seeStatusCode(200)
+            ->seeJson([
+                'name' => 'Temuco',
+            ]);
     }
 
     public function testShow()
@@ -49,7 +54,7 @@ class PropertyTest extends TestCase
     {
         $id = 'TCO';
         $this->json('DELETE', $this->baseUrl.'/'.$id)
-            ->seeStatusCode(200);
+            ->seeStatusCode(204);
         $this->json('GET', $this->baseUrl.'/'.$id)
             ->seeStatusCode(404);
     }
