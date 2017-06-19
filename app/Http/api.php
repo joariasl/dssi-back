@@ -12,3 +12,7 @@
 */
 
 Route::resource('properties', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+Route::resource('checklists', 'ChecklistController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+Route::resource('checklist-item-groups', 'ChecklistItemGroupController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);

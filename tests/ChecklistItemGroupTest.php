@@ -4,9 +4,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class PropertyTest extends TestCase
+class ChecklistItemGroupTest extends TestCase
 {
-    protected $baseUrl = 'http://localhost/api/properties';
+    protected $baseUrl = 'http://localhost/api/checklist-item-groups';
 
     public function testIndex()
     {
@@ -17,42 +17,42 @@ class PropertyTest extends TestCase
 
     public function testCreate()
     {
-        $params = ['id'=>'ABC', 'name' => 'ABCity'];
+        $params = ['id'=>'100', 'name' => 'Grupo1'];
         $this->json('POST', $this->baseUrl, $params)
             ->seeStatusCode(201);
         $this->json('GET', $this->baseUrl.'/'.$params['id'])
             ->seeStatusCode(200)
             ->seeJson([
-                'name' => 'ABCity',
+                'name' => 'Grupo1',
             ]);
     }
 
     public function testShow()
     {
-        $id = 'ABC';
+        $id = '100';
         $this->json('GET', $this->baseUrl.'/'.$id)
             ->seeStatusCode(200)
             ->seeJson([
-                'name' => 'ABCity',
+                'name' => 'Grupo1',
             ]);
     }
 
     public function testUpdate()
     {
-        $params = ['name' => 'ABCity2'];
-        $id = 'ABC';
+        $params = ['name' => 'Grupo2'];
+        $id = '100';
         $this->json('PUT', $this->baseUrl.'/'.$id, $params)
             ->seeStatusCode(200);
         $this->json('GET', $this->baseUrl.'/'.$id)
             ->seeStatusCode(200)
             ->seeJson([
-                'name' => 'ABCity2',
+                'name' => 'Grupo2',
             ]);
     }
 
     public function testDestroy()
     {
-        $id = 'ABC';
+        $id = '100';
         $this->json('DELETE', $this->baseUrl.'/'.$id)
             ->seeStatusCode(204);
         $this->json('GET', $this->baseUrl.'/'.$id)
