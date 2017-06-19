@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
-class ChecklistRegistersSeeder extends Seeder
+class ChecklistRegistriesSeeder extends Seeder
 {
-    protected $table = 'checklist_registers';
+    protected $table = 'checklist_registries';
 
     /**
      * Run the database seeds.

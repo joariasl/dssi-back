@@ -19,7 +19,7 @@ class CreateChecklistEntriesTable extends Migration
             $table->boolean('response');
             $table->string('observations',255);
             $table->timestamps();
-            $table->foreign('checklist_registry_id')->references('id')->on('checklist_registers');
+            $table->foreign('checklist_registry_id')->references('id')->on('checklist_registries');
             $table->foreign('checklist_item_id')->references('id')->on('checklist_items');
         });
     }

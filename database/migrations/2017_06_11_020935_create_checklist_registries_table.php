@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateChecklistRegistersTable extends Migration
+class CreateChecklistRegistriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateChecklistRegistersTable extends Migration
      */
     public function up()
     {
-        Schema::create('checklist_registers', function (Blueprint $table) {
+        Schema::create('checklist_registries', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('turn')->unsigned();
             $table->integer('checklist_id')->unsigned();
@@ -32,6 +32,6 @@ class CreateChecklistRegistersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('checklist_registers');
+        Schema::drop('checklist_registries');
     }
 }
