@@ -15,7 +15,11 @@ class ChecklistItemGroupsSeeder extends Seeder
     {
         DB::table($this->table)->insert([
             'id' => '1',
-            'name' => 'Grupo1',
+            'name' => 'Operatividad',
+        ]);
+        DB::table($this->table)->insert([
+            'id' => '2',
+            'name' => 'Actividad',
         ]);
     }
 }

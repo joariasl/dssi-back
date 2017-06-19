@@ -21,5 +21,13 @@ class ChecklistRegistersSeeder extends Seeder
             'credential_avaliable' => '5',
             'credential_delivered' => '10',
         ]);
+        DB::table($this->table)->insert([
+            'id' => '2',
+            'turn' => '2',
+            'checklist_id' => '1',
+            'user_id' => '1',
+            'credential_avaliable' => '4',
+            'credential_delivered' => '11',
+        ]);
     }
 }

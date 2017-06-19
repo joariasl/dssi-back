@@ -18,7 +18,43 @@ class ChecklistEntriesSeeder extends Seeder
             'checklist_registry_id' => '1',
             'checklist_item_id' => '1',
             'response' => '1',
-            'observations' => 'Observación',
+            'observations' => 'Observación de equipo Radial.',
+        ]);
+        DB::table($this->table)->insert([
+            'id' => '2',
+            'checklist_registry_id' => '1',
+            'checklist_item_id' => '2',
+            'response' => '0',
+            'observations' => 'Observación de Computador que no funciona.',
+        ]);
+        DB::table($this->table)->insert([
+            'id' => '3',
+            'checklist_registry_id' => '1',
+            'checklist_item_id' => '3',
+            'response' => '1',
+            'observations' => 'Observación de retiro de basura que está retirada. Con éste # símbolo, de gato.',
+        ]);
+
+        DB::table($this->table)->insert([
+            'id' => '4',
+            'checklist_registry_id' => '2',
+            'checklist_item_id' => '1',
+            'response' => '0',
+            'observations' => 'Observación de equipo Radial que ahora no funciona.',
+        ]);
+        DB::table($this->table)->insert([
+            'id' => '5',
+            'checklist_registry_id' => '2',
+            'checklist_item_id' => '2',
+            'response' => '1',
+            'observations' => 'Observación de Computador que ahora SÍ funciona.',
+        ]);
+        DB::table($this->table)->insert([
+            'id' => '6',
+            'checklist_registry_id' => '2',
+            'checklist_item_id' => '3',
+            'response' => '0',
+            'observations' => 'Ahora no se ha retirado la basura.',
         ]);
     }
 }
