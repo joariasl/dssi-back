@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\ChecklistItem;
 use App\ChecklistItemGroup;
 use Illuminate\Http\Request;
 
@@ -17,6 +18,12 @@ class ChecklistItemGroupController extends Controller
      */
     public function index()
     {
+        if($checklistId = request('checklist_id')){
+            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($checklistId) {
+                                        $query->where('checklist_id', $checklistId);
+                                    })->get();
+            return $checklistItemGroups;
+        }
         return ChecklistItemGroup::all();
     }
 
