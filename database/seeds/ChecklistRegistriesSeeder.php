@@ -15,6 +15,7 @@ class ChecklistRegistriesSeeder extends Seeder
     {
         DB::table($this->table)->insert([
             'id' => '1',
+            'date' => '2017-06-18',
             'turn' => '1',
             'checklist_id' => '1',
             'user_id' => '1',
@@ -23,6 +24,7 @@ class ChecklistRegistriesSeeder extends Seeder
         ]);
         DB::table($this->table)->insert([
             'id' => '2',
+            'date' => '2017-06-18',
             'turn' => '2',
             'checklist_id' => '1',
             'user_id' => '1',
