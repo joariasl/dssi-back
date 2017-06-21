@@ -21,9 +21,6 @@ class PropertiesTableSeeder extends Seeder
             'id' => 'SCL',
             'name' => 'Santiago',
         ]);
-        DB::table($this->table)->insert([
-            'id' => str_random(3),
-            'name' => str_random(10),
-        ]);
+        factory(App\Property::class, 3)->create();
     }
 }

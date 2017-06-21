@@ -11,6 +11,13 @@
 |
 */
 
+$factory->define(App\Property::class, function (Faker\Generator $faker) {
+    return [
+        'id' => strtoupper(str_random(3)),
+        'name' => $faker->city
+    ];
+});
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
