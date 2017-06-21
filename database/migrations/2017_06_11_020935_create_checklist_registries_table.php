@@ -14,6 +14,7 @@ class CreateChecklistRegistriesTable extends Migration
     {
         Schema::create('checklist_registries', function (Blueprint $table) {
             $table->increments('id');
+            $table->date('date');
             $table->integer('turn')->unsigned();
             $table->integer('checklist_id')->unsigned();
             $table->integer('user_id')->unsigned();
