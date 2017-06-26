@@ -11,7 +11,7 @@
 |
 */
 
-$router->group(['middleware' => 'jwt.auth'], function ($router) {
+$router->group(App::environment('testing')?[]:['middleware' => 'jwt.auth'], function ($router) {
     Route::resource('properties', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
     Route::resource('checklists', 'ChecklistController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
