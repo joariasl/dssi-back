@@ -18,3 +18,6 @@ Route::get('/', function () {
     // Or if locale or testing
     return view('welcome');
 });
+
+Route::post('authenticate', 'AuthenticateController@authenticate');
+Route::post('invalidate', ['uses' => 'AuthenticateController@invalidate', 'middleware' => 'jwt.auth']);
