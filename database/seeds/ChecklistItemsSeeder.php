@@ -33,5 +33,12 @@ class ChecklistItemsSeeder extends Seeder
             'name' => 'Retiro de basura',
             'status' => '1',
         ]);
+        DB::table($this->table)->insert([
+            'id' => '4',
+            'checklist_id' => '2',
+            'checklist_item_group_id' => '2',
+            'name' => 'Retiro de basura 2',
+            'status' => '1',
+        ]);
     }
 }

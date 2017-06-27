@@ -13,6 +13,7 @@ class ChecklistEntriesSeeder extends Seeder
      */
     public function run()
     {
+        // For checklist_registry_id = 1
         DB::table($this->table)->insert([
             'id' => '1',
             'checklist_registry_id' => '1',
@@ -34,7 +35,7 @@ class ChecklistEntriesSeeder extends Seeder
             'response' => '1',
             'observations' => 'Observación de retiro de basura que está retirada. Con éste # símbolo, de gato.',
         ]);
-
+        // For checklist_registry_id = 1
         DB::table($this->table)->insert([
             'id' => '4',
             'checklist_registry_id' => '2',
@@ -55,6 +56,14 @@ class ChecklistEntriesSeeder extends Seeder
             'checklist_item_id' => '3',
             'response' => '0',
             'observations' => 'Ahora no se ha retirado la basura.',
+        ]);
+        // For checklist_registry_id = 3
+        DB::table($this->table)->insert([
+            'id' => '7',
+            'checklist_registry_id' => '3',
+            'checklist_item_id' => '4',
+            'response' => '1',
+            'observations' => 'One text.',
         ]);
     }
 }

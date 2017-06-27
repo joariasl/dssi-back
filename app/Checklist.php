@@ -15,4 +15,12 @@ class Checklist extends Model
     {
         return $this->hasMany('App\ChecklistRegistry');
     }
+
+    /**
+     * Get the items for ChecklistItem.
+     */
+    public function checklistItems()
+    {
+        return $this->hasMany('App\ChecklistItem');
+    }
 }

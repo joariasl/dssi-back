@@ -23,6 +23,13 @@ class ChecklistRegistryController extends Controller
                                     ->with('checklistEntries')
                                     ->get();
             return $checklistRegistries;
+        } elseif ($propertyId = request('property_id')){
+            $checklistRegistries = ChecklistRegistry::whereHas('checklist', function ($query) use ($propertyId) {
+                                        $query->where('property_id', $propertyId);
+                                    })
+                                    ->with('checklistEntries')
+                                    ->get();
+            return $checklistRegistries;
         }
         return ChecklistRegistry::all();
     }

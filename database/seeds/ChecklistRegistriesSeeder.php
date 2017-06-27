@@ -13,6 +13,7 @@ class ChecklistRegistriesSeeder extends Seeder
      */
     public function run()
     {
+        // For checklist_id = 2
         DB::table($this->table)->insert([
             'id' => '1',
             'date' => '2017-06-18',
@@ -30,6 +31,16 @@ class ChecklistRegistriesSeeder extends Seeder
             'user_id' => '1',
             'credential_avaliable' => '4',
             'credential_delivered' => '11',
+        ]);
+        // For checklist_id = 2
+        DB::table($this->table)->insert([
+            'id' => '3',
+            'date' => '2017-06-27',
+            'turn' => '1',
+            'checklist_id' => '2',
+            'user_id' => '1',
+            'credential_avaliable' => '4',
+            'credential_delivered' => '2',
         ]);
     }
 }
