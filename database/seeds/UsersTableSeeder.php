@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'John',
             'lastname' => 'Doe',
             'email' => 'Doe',
-            'password' => 'secret',
+            'password' => bcrypt('secret'),
             'property_id' => 'TCO',
         ]);
     }

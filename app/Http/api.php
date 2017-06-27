@@ -11,10 +11,12 @@
 |
 */
 
-Route::resource('properties', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+$router->group(App::environment('testing')?[]:['middleware' => 'jwt.auth'], function ($router) {
+    Route::resource('properties', 'PropertyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
-Route::resource('checklists', 'ChecklistController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::resource('checklists', 'ChecklistController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
-Route::resource('checklist-item-groups', 'ChecklistItemGroupController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::resource('checklist-item-groups', 'ChecklistItemGroupController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
-Route::resource('checklist-registries', 'ChecklistRegistryController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::resource('checklist-registries', 'ChecklistRegistryController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+});
