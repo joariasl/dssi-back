@@ -9,6 +9,14 @@ class ChecklistItem extends Model
     protected $fillable = ['id', 'checklist_id', 'checklist_item_group_id', 'name', 'status'];
 
     /**
+     * Get the item for Checklist.
+     */
+    public function checklist()
+    {
+        return $this->belongsTo('App\Checklist');
+    }
+
+    /**
      * Get the item for ChecklistGroup.
      */
     public function checklistItemGroup()

@@ -23,6 +23,14 @@ class ChecklistItemGroupController extends Controller
                                         $query->where('checklist_id', $checklistId);
                                     })->get();
             return $checklistItemGroups;
+        } elseif ($propertyId = request('property_id')){
+            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($propertyId) {
+                                        $query->whereHas('checklist', function ($query) use ($propertyId) {
+                                            $query->where('property_id', $propertyId);
+                                        });
+                                    })
+                                    ->get();
+            return $checklistItemGroups;
         }
         return ChecklistItemGroup::all();
     }
