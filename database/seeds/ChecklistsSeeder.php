@@ -17,5 +17,9 @@ class ChecklistsSeeder extends Seeder
             'id' => '1',
             'property_id' => 'TCO',
         ]);
+        DB::table($this->table)->insert([
+            'id' => '2',
+            'property_id' => 'SCL',
+        ]);
     }
 }
