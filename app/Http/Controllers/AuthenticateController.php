@@ -45,4 +45,15 @@ class AuthenticateController extends Controller
     public function invalidate(Request $request) {
         JWTAuth::parseToken()->invalidate();
     }
+
+    /**
+     * Validate
+     * Validate the token
+     *
+     * @param Request $request
+     */
+    public function validateToken(Request $request) {
+        JWTAuth::parseToken()->authenticate();
+        return response()->make(null, 200);
+    }
 }
