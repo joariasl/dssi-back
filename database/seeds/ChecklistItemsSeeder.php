@@ -24,7 +24,7 @@ class ChecklistItemsSeeder extends Seeder
             'checklist_id' => '1',
             'checklist_item_group_id' => '1',
             'name' => 'Computador',
-            'status' => '1',
+            'status' => '0',
         ]);
         DB::table($this->table)->insert([
             'id' => '3',

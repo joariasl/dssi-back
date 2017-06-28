@@ -21,6 +21,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ChecklistItemsSeeder::class);
         $this->call(ChecklistRegistriesSeeder::class);
         $this->call(ChecklistEntriesSeeder::class);
+        $this->call(PlacesTableSeeder::class);
+        $this->call(KeysSeeder::class);
+        $this->call(PeopleTableSeeder::class);
+        $this->call(KeyLoansSeeder::class);
+
 
         Model::reguard();
     }
