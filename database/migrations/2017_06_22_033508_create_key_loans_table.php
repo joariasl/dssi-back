@@ -15,6 +15,7 @@ class CreateKeyLoansTable extends Migration
         Schema::create('key_loans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('key_id')->unsigned();
+            $table->dateTime('date');
             $table->string('delivery_rut', 9);
             $table->string('return_rut', 9)->nullable();
             $table->string('return_condition',100)->nullable();

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class KeysSeeder extends Seeder
+class KeysTableSeeder extends Seeder
 {
     protected $table = 'keys';
     /**

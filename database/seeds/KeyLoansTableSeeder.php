@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class KeyLoansSeeder extends Seeder
+class KeyLoansTableSeeder extends Seeder
 {
     protected $table = 'key_loans';
     /**
@@ -15,6 +15,7 @@ class KeyLoansSeeder extends Seeder
         DB::table($this->table)->insert([
             'id' => '1',
             'key_id' => '1',
+            'date' => '2017-06-18',
             'delivery_rut' => '17982585',
             'return_rut' => null,
             'return_condition' => 'Operativa',
@@ -23,6 +24,7 @@ class KeyLoansSeeder extends Seeder
         DB::table($this->table)->insert([
             'id' => '2',
             'key_id' => '2',
+            'date' => '2017-06-19',
             'delivery_rut' => '17946099',
             'return_rut' => null,
             'return_condition' => 'Operativa',
@@ -31,6 +33,7 @@ class KeyLoansSeeder extends Seeder
         DB::table($this->table)->insert([
             'id' => '3',
             'key_id' => '3',
+            'date' => '2017-06-20',
             'delivery_rut' => '1234567',
             'return_rut' => null,
             'return_condition' => 'Operativa',
