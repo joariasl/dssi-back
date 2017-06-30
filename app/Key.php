@@ -9,9 +9,9 @@ class Key extends Model
     protected $fillable = ['id', 'property_id', 'code'];
 
     /**
-     * Get the item for KeyLoanCodes.
+     * Get the item for KeyLoan.
      */
-    public function keyLoanCode()
+    public function keyLoan()
     {
         return $this->hasMany('App\KeyLoan');
     }
