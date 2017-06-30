@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Checklist;
 use App\ChecklistRegistry;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use JWTAuth;
 
 class ChecklistRegistryController extends Controller
 {
@@ -42,7 +44,24 @@ class ChecklistRegistryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = JWTAuth::parseToken()->toUser();
+        if($checklistId = request('checklist_id')){
+            $checklist = Checklist::find($checklistId);
+        }
+        elseif ($propertyId = request('property_id')){
+            $checklist = Checklist::where('property_id', $propertyId)
+                ->first();
+        }
+        //$checklist->checklistRegistries()->create(array_merge($request->all(),['user_id' => $user->id]));
+        //ChecklistRegistry::create(array_merge($request->all(),['user_id' => $user->id, 'checklist_id' => $checklist->id]));
+        //$checklistRegistry = new ChecklistRegistry(array_merge($request->all(),['user_id' => $user->id]));
+        $checklistRegistry = new ChecklistRegistry($request->all());
+        $checklistRegistry->checklist_id = $checklist->id;
+        $checklistRegistry->user_id = $user->id;
+        if($checklistRegistry->save()) {
+            $checklistRegistry->checklistEntries()->createMany($request->all()['checklist_entries']);
+        }
+        return response()->make(null, 201);
     }
 
     /**
