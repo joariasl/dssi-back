@@ -7,7 +7,7 @@ class CreateKeyLoansTable extends Migration
 {
     /**
      * Run the migrations.
-     *s
+     *
      * @return void
      */
     public function up()
