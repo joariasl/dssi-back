@@ -11,6 +11,15 @@
 |
 */
 
+$factory->define(App\Person::class, function (Faker\Generator $faker) {
+    return [
+        'rut' => $faker->numberBetween($min = 10000000, $max = 20000000),
+        'dv' => $faker->randomDigitNotNull,
+        'name' => $faker->name,
+        'lastname' => $faker->lastName
+    ];
+});
+
 $factory->define(App\Property::class, function (Faker\Generator $faker) {
     return [
         'id' => strtoupper(str_random(3)),

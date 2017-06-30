@@ -30,5 +30,6 @@ class PeopleTableSeeder extends Seeder
             'name' => 'Fabian',
             'lastname' => 'Barrientos',
         ]);
+        factory(App\Person::class, 10)->create();
     }
 }
