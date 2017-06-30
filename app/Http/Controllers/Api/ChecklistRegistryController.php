@@ -53,7 +53,13 @@ class ChecklistRegistryController extends Controller
      */
     public function show($id)
     {
-        //
+        $checklistRegistry = ChecklistRegistry::with('checklistEntries')
+                                ->find($id);
+        if($checklistRegistry){
+            return $checklistRegistry;
+        }else{
+            return response()->make(null, 404);
+        }
     }
 
     /**
