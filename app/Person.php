@@ -9,17 +9,17 @@ class Person extends Model
     protected $fillable = ['rut', 'dv', 'name', 'lastname'];
 
     /**
-     * Get the item for KeyLoans.
+     * Get the item for KeyLoansDeliveries.
      */
-    public function keyLoanDelivery()
+    public function keyLoanDeliveries()
     {
         return $this->hasMany('App\KeyLoan', 'rut', 'delivery_rut');
     }
 
     /**
-     * Get the item for KeyLoans.
+     * Get the item for KeyLoansReturns.
      */
-    public function keyLoanReturn()
+    public function keyLoanReturns()
     {
         return $this->hasMany('App\KeyLoan', 'rut', 'return_rut');
     }
