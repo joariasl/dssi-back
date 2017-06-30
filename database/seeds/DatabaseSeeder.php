@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(ChecklistRegistriesSeeder::class);
         $this->call(ChecklistEntriesSeeder::class);
         $this->call(PlacesTableSeeder::class);
-        $this->call(KeysSeeder::class);
+        $this->call(KeysTableSeeder::class);
         $this->call(PeopleTableSeeder::class);
-        $this->call(KeyLoansSeeder::class);
+        $this->call(KeyLoansTableSeeder::class);
 
 
         Model::reguard();

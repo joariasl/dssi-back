@@ -21,4 +21,8 @@ $router->group(App::environment('testing')?[]:['middleware' => 'jwt.auth'], func
     Route::resource('checklist-items', 'ChecklistItemController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
     Route::resource('checklist-registries', 'ChecklistRegistryController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+    Route::resource('keys', 'KeyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+    Route::resource('key-loans', 'KeyLoanController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 });
