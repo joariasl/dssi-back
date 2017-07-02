@@ -17,19 +17,33 @@ class ChecklistItemController extends Controller
      */
     public function index()
     {
+        $request = request();
+        $this->validate($request, [
+            'checklist_id' => 'integer',
+            'property_id' => 'string|size:3',
+            'without_disabled' => 'boolean'
+        ]);
+
         /* TODO - Aplicar filtro de checklistId según cheklists pertenecientes a la propiedad usuario, cuando ya se haya identificado. */
+        $includeDisabled = request('without_disabled', false);
         if($checklistId = request('checklist_id')){
-            $checklistRegistries = ChecklistItem::query('checklist_id', $checklistId)
-                                    ->with('checklistItemGroup')
-                                    ->get();
-            return $checklistRegistries;
+            $checklistItemsQuery = ChecklistItem::where('checklist_id', $checklistId)
+                ->with('checklistItemGroup');
+            if($includeDisabled){
+                $checklistItemsQuery = $checklistItemsQuery->where('status', 1);
+            }
+            $checklistItems = $checklistItemsQuery->get();
+            return $checklistItems;
         } elseif ($propertyId = request('property_id')){
-            $checklistRegistries = ChecklistItem::whereHas('checklist', function ($query) use ($propertyId) {
-                                        $query->where('property_id', $propertyId);
-                                    })
-                                    ->with('checklistItemGroup')
-                                    ->get();
-            return $checklistRegistries;
+            $checklistItemsQuery = ChecklistItem::whereHas('checklist', function ($query) use ($propertyId) {
+                                    $query->where('property_id', $propertyId);
+                                })
+                                    ->with('checklistItemGroup');
+            if($includeDisabled){
+                $checklistItemsQuery = $checklistItemsQuery->where('status', 1);
+            }
+            $checklistItems = $checklistItemsQuery->get();
+            return $checklistItems;
         }
         return ChecklistItem::all();
     }
