@@ -49,16 +49,6 @@ class ChecklistItemController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,7 +56,16 @@ class ChecklistItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request = request();
+        $this->validate($request, [
+            'checklist_id'            => 'required|integer',
+            'checklist_item_group_id' => 'required|integer',
+            'name'                    => 'required|string',
+            'status'                  => 'required|boolean',
+        ]);
+
+        ChecklistItem::create($request->all());
+        return response()->make(null, 201);
     }
 
     /**
@@ -78,17 +77,6 @@ class ChecklistItemController extends Controller
     public function show($id)
     {
         return ChecklistItem::find($id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

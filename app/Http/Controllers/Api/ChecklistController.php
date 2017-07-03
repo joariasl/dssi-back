@@ -17,6 +17,17 @@ class ChecklistController extends Controller
      */
     public function index()
     {
+        $request = request();
+        $this->validate($request, [
+            'property_id' => 'string|size:3',
+        ]);
+
+        if ($propertyId = request('property_id')){
+           $checklist = Checklist::where('property_id', $propertyId)
+                            ->with('checklistItems.checklistItemGroup')
+                            ->first();
+            return $checklist;
+        }
         return Checklist::all();
     }
 
