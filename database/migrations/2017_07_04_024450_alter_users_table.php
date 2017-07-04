@@ -13,7 +13,7 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('amphitryon_id')->unsigned();
+            $table->integer('amphitryon_id')->unsigned()->unique();
             $table->foreign('amphitryon_id')->references('id')->on('amphitryons');
         });
     }
@@ -26,7 +26,7 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_amphitryon_id_foreign');;
+            $table->dropForeign('users_amphitryon_id_foreign');
             $table->dropColumn('amphitryon_id');
         });
     }

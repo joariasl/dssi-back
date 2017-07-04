@@ -17,7 +17,7 @@ class PeopleTableSeeder extends Seeder
             'dv' => '1',
             'name' => 'John',
             'lastname' => 'Doe',
-            'birthdate' => '01-01-1991',
+            'birthdate' => '1991-01-01',
             'gender' => 'M',
         ]);
         DB::table($this->table)->insert([
@@ -25,7 +25,7 @@ class PeopleTableSeeder extends Seeder
             'dv' => '8',
             'name' => 'Alex',
             'lastname' => 'Novoa',
-            'birthdate' => '02-02-1992',
+            'birthdate' => '1992-02-02',
             'gender' => 'M',
         ]);
         DB::table($this->table)->insert([
@@ -33,7 +33,7 @@ class PeopleTableSeeder extends Seeder
             'dv' => '8',
             'name' => 'Diana',
             'lastname' => 'Ortiz',
-            'birthdate' => '03-03-1993',
+            'birthdate' => '1993-03-03',
             'gender' => 'F',
         ]);
     }

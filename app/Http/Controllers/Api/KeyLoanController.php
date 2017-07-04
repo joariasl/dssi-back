@@ -19,8 +19,8 @@ class KeyLoanController extends Controller
     {
         if($propertyId = request('property_id')){
             $keyLoans = KeyLoan::with('key')
-                            ->with('personDelivery')
-                            ->with('personReturn')
+                            ->with('amphitryonDelivery')
+                            ->with('amphitryonReturngit')
                             ->get();
             return $keyLoans;
         }
