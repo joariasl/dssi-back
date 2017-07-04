@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChecklistRegistry extends Model
 {
-    protected $fillable = ['id', 'turn', 'checklist_id', 'user_id', 'credential_avaliable', 'credential_delivered'];
+    protected $fillable = ['id', 'date', 'turn', 'checklist_id', 'user_id', 'credential_avaliable', 'credential_delivered'];
 
     /**
      * Get the item for Checklist.

@@ -44,6 +44,15 @@ class ChecklistRegistryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'checklist_id'         => 'integer',
+            'property_id'          => 'string|size:3',
+            'credential_avaliable' => 'required|integer',
+            'credential_delivered' => 'required|integer',
+            'date'                 => 'required|date',
+            'turn'                 => 'required|integer'
+        ]);
+
         $user = JWTAuth::parseToken()->toUser();
         if($checklistId = request('checklist_id')){
             $checklist = Checklist::find($checklistId);
