@@ -16,14 +16,14 @@ class CreateKeyLoansTable extends Migration
             $table->increments('id');
             $table->integer('key_id')->unsigned();
             $table->dateTime('date');
-            $table->string('delivery_rut', 9);
-            $table->string('return_rut', 9)->nullable();
+            $table->integer('delivery_amphitryon_id')->unsigned();
+            $table->integer('return_amphitryon_id')->unsigned()->nullable();
             $table->string('return_condition',100)->nullable();
             $table->string('observations',255)->nullable();
             $table->timestamps();
             $table->foreign('key_id')->references('id')->on('keys');
-            $table->foreign('delivery_rut')->references('rut')->on('people');
-            $table->foreign('return_rut')->references('rut')->on('people');
+            $table->foreign('delivery_amphitryon_id')->references('id')->on('amphitryons');
+            $table->foreign('return_amphitryon_id')->references('id')->on('amphitryons');
         });
     }
 

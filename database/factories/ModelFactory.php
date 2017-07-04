@@ -10,7 +10,7 @@
 | database. Just tell the factory how a default model should look.
 |
 */
-
+/*
 $factory->define(App\Person::class, function (Faker\Generator $faker) {
     return [
         'rut' => $faker->numberBetween($min = 10000000, $max = 20000000),
@@ -19,6 +19,7 @@ $factory->define(App\Person::class, function (Faker\Generator $faker) {
         'lastname' => $faker->lastName
     ];
 });
+*/
 
 $factory->define(App\Property::class, function (Faker\Generator $faker) {
     return [

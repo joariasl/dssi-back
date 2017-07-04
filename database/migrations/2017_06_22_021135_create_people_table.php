@@ -17,6 +17,8 @@ class CreatePeopleTable extends Migration
             $table->char('dv', 1);
             $table->string('name', 100);
             $table->string('lastname', 100);
+            $table->string('birthdate', 100);
+            $table->string('gender', 100);
             $table->timestamps();
             $table->primary('rut');
         });

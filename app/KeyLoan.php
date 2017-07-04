@@ -6,22 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class KeyLoan extends Model
 {
-    protected $fillable = ['id', 'key_id', 'date', 'delivery_rut', 'return_rut', 'return_condition', 'observations'];
+    protected $fillable = ['id', 'key_id', 'date', 'delivery_amphitryon_id', 'return_amphitryon_id', 'return_condition', 'observations'];
 
     /**
-     * Get the item for Person.
+     * Get the item for Amphitryon.
      */
-    public function personDelivery()
+    public function amphitryonDelivery()
     {
-        return $this->belongsTo('App\Person', 'delivery_rut', 'rut');
+        return $this->belongsTo('App\Amphitryon', 'delivery_amphitryon_id', 'id');
     }
 
     /**
-     * Get the item for Person.
+     * Get the item for Amphitryon.
      */
-    public function personReturn()
+    public function amphitryonReturn()
     {
-        return $this->belongsTo('App\Person', 'return_rut', 'rut');
+        return $this->belongsTo('App\Amphitryon', 'return_amphitryon_id', 'id');
     }
 
     /**

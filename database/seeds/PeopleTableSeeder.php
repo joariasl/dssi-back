@@ -15,21 +15,26 @@ class PeopleTableSeeder extends Seeder
         DB::table($this->table)->insert([
             'rut' => '17982585',
             'dv' => '1',
-            'name' => 'Gabriel',
-            'lastname' => 'Salazar',
+            'name' => 'John',
+            'lastname' => 'Doe',
+            'birthdate' => '01-01-1991',
+            'gender' => 'M',
         ]);
         DB::table($this->table)->insert([
             'rut' => '17946099',
             'dv' => '8',
-            'name' => 'Maria',
+            'name' => 'Alex',
             'lastname' => 'Novoa',
+            'birthdate' => '02-02-1992',
+            'gender' => 'M',
         ]);
         DB::table($this->table)->insert([
             'rut' => '1234567',
             'dv' => '8',
-            'name' => 'Fabian',
-            'lastname' => 'Barrientos',
+            'name' => 'Diana',
+            'lastname' => 'Ortiz',
+            'birthdate' => '03-03-1993',
+            'gender' => 'F',
         ]);
-        factory(App\Person::class, 10)->create();
     }
 }
