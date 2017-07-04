@@ -17,7 +17,7 @@ class CreateChecklistEntriesTable extends Migration
             $table->integer('checklist_registry_id')->unsigned();
             $table->integer('checklist_item_id')->unsigned();
             $table->boolean('response');
-            $table->string('observations',255);
+            $table->string('observations',255)->nullable();
             $table->timestamps();
             $table->foreign('checklist_registry_id')->references('id')->on('checklist_registries');
             $table->foreign('checklist_item_id')->references('id')->on('checklist_items');
