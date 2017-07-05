@@ -15,4 +15,12 @@ class ChecklistEntry extends Model
     {
         return $this->belongsTo('App\ChecklistRegistry');
     }
+
+    /**
+     * Get the item for ChecklistItem.
+     */
+    public function checklistItem()
+    {
+        return $this->belongsTo('App\ChecklistItem');
+    }
 }
