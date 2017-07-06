@@ -22,14 +22,14 @@ class ChecklistRegistryController extends Controller
         /* TODO - Aplicar filtro de checklistId según cheklists pertenecientes a la propiedad usuario, cuando ya se haya identificado. */
         if($checklistId = request('checklist_id')){
             $checklistRegistries = ChecklistRegistry::query('checklist_id', $checklistId)
-                                    ->with('checklistEntries')
+                                    ->with('checklistEntries.checklistItem')
                                     ->get();
             return $checklistRegistries;
         } elseif ($propertyId = request('property_id')){
             $checklistRegistries = ChecklistRegistry::whereHas('checklist', function ($query) use ($propertyId) {
                                         $query->where('property_id', $propertyId);
                                     })
-                                    ->with('checklistEntries')
+                                    ->with('checklistEntries.checklistItem')
                                     ->get();
             return $checklistRegistries;
         }
@@ -81,7 +81,7 @@ class ChecklistRegistryController extends Controller
      */
     public function show($id)
     {
-        $checklistRegistry = ChecklistRegistry::with('checklistEntries')
+        $checklistRegistry = ChecklistRegistry::with('checklistEntries.checklistItem.checklistItemGroup')
                                 ->find($id);
         if($checklistRegistry){
             return $checklistRegistry;

@@ -88,7 +88,14 @@ class ChecklistItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'id'     => 'integer',
+            'name'   => 'string',
+            'status' => 'boolean',
+        ]);
+
+        $checklistItem = ChecklistItem::find($id);
+        $checklistItem->update($request->all());
     }
 
     /**

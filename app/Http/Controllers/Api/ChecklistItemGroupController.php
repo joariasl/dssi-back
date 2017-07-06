@@ -18,20 +18,20 @@ class ChecklistItemGroupController extends Controller
      */
     public function index()
     {
-        if($checklistId = request('checklist_id')){
-            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($checklistId) {
-                                        $query->where('checklist_id', $checklistId);
-                                    })->get();
-            return $checklistItemGroups;
-        } elseif ($propertyId = request('property_id')){
-            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($propertyId) {
-                                        $query->whereHas('checklist', function ($query) use ($propertyId) {
-                                            $query->where('property_id', $propertyId);
-                                        });
-                                    })
-                                    ->get();
-            return $checklistItemGroups;
-        }
+//        if($checklistId = request('checklist_id')){
+//            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($checklistId) {
+//                                        $query->where('checklist_id', $checklistId);
+//                                    })->get();
+//            return $checklistItemGroups;
+//        } elseif ($propertyId = request('property_id')){
+//            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($propertyId) {
+//                                        $query->whereHas('checklist', function ($query) use ($propertyId) {
+//                                            $query->where('property_id', $propertyId);
+//                                        });
+//                                    })
+//                                    ->get();
+//            return $checklistItemGroups;
+//        }
         return ChecklistItemGroup::all();
     }
 
@@ -72,6 +72,11 @@ class ChecklistItemGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'id'     => 'integer',
+            'name'   => 'string',
+        ]);
+
         $checklistItemGroup = ChecklistItemGroup::find($id);
         $checklistItemGroup->update($request->all());
     }
