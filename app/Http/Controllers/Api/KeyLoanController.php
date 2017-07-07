@@ -46,7 +46,19 @@ class KeyLoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'key_id'                => 'required|integer',
+            'property_id'           => 'required|string|size:3',
+            'delivery_user_id'      => 'required|integer',
+            'delivery_amphitryon_id'=> 'required|integer',
+            'return_user_id'        => 'integer',
+            'return_amphitryon_id'  => 'integer',
+            'date'                  => 'required|date',
+            'return_condition'      => 'string|size:100',
+            'observations'          => 'string|size:255'
+        ]);
+
+        KeyLoan::create($request->all());
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KeyLoan extends Model
 {
-    protected $fillable = ['id', 'key_id', 'date', 'delivery_amphitryon_id', 'return_amphitryon_id', 'return_condition', 'observations'];
+    protected $fillable = ['id', 'key_id', 'delivery_datetime', 'return_datetime', 'delivery_user_id', 'delivery_amphitryon_id', 'return_user_id', 'return_amphitryon_id', 'return_condition', 'observations'];
 
     /**
      * Get the item for Amphitryon.
