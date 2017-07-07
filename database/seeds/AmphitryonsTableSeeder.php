@@ -14,7 +14,7 @@ class AmphitryonsTableSeeder extends Seeder
     {
         DB::table($this->table)->insert([
             'id' => '1',
-            'rut' => '17982585',
+            'person_rut' => '17982585',
             'username' => 'jdoe',
             'email' => 'john@mail.com',
             'admission_date' => '2011-01-11',
@@ -24,7 +24,7 @@ class AmphitryonsTableSeeder extends Seeder
         ]);
         DB::table($this->table)->insert([
             'id' => '2',
-            'rut' => '17946099',
+            'person_rut' => '17946099',
             'username' => 'anovoa',
             'email' => 'alex@mail.com',
             'admission_date' => '2012-02-12',
@@ -34,7 +34,7 @@ class AmphitryonsTableSeeder extends Seeder
         ]);
         DB::table($this->table)->insert([
             'id' => '3',
-            'rut' => '1234567',
+            'person_rut' => '1234567',
             'username' => 'dortiz',
             'email' => 'diana@mail.com',
             'admission_date' => '2013-03-13',

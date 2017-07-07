@@ -14,13 +14,13 @@ class CreateAmphitryonsTable extends Migration
     {
         Schema::create('amphitryons', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('rut', 9)->unique();
+            $table->string('person_rut', 9)->unique();
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->date('admission_date');
             $table->date('retirement_date');
             $table->timestamps();
-            $table->foreign('rut')->references('rut')->on('people');
+            $table->foreign('person_rut')->references('rut')->on('people');
         });
     }
 

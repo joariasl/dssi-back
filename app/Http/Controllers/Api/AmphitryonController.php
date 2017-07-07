@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\KeyLoan;
+use App\Amphitryon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class KeyLoanController extends Controller
+class AmphitryonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,17 +17,16 @@ class KeyLoanController extends Controller
      */
     public function index()
     {
-        if($propertyId = request('property_id')){
-            $keyLoans = KeyLoan::with('key')
-                            ->with('amphitryonDelivery')
-                            ->with('amphitryonReturn')
-                            ->get();
-            return $keyLoans;
+        if($personRut = request('person_rut')){
+            $amphitryons = Amphitryon::where('person_rut', $personRut)
+                ->with('person')
+                ->first();
+            return $amphitryons;
         }
 
-        return KeyLoan::all();
+        return Amphitryon::all();
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -36,21 +35,7 @@ class KeyLoanController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'key_id'                => 'required|integer',
-            'property_id'           => 'required|string|size:3',
-            'delivery_user_id'      => 'required|integer',
-            'delivery_amphitryon_id'=> 'required|integer',
-            'return_user_id'        => 'integer',
-            'return_amphitryon_id'  => 'integer',
-            'delivery_datetime'     => 'required|date',
-            'delivery_datetime'     => 'date',
-            'return_condition'      => 'string|size:100',
-            'observations'          => 'string|size:255'
-        ]);
-
-        KeyLoan::create($request->all());
-        return response()->make(null, 201);
+        //
     }
 
     /**

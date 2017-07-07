@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Amphitryon extends Model
 {
-    protected $fillable = ['id', 'rut', 'username', 'email' , 'admission_date', 'retirement_date'];
+    protected $fillable = ['id', 'person_rut', 'username', 'email' , 'admission_date', 'retirement_date'];
 
     /**
      * Get the item for KeyLoansDeliveries.
@@ -29,6 +29,6 @@ class Amphitryon extends Model
      */
     public function person()
     {
-        return $this->belongsTo('App\Person');
+        return $this->belongsTo('App\Person', 'person_rut', 'rut');
     }
 }
