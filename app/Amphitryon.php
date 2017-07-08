@@ -39,4 +39,12 @@ class Amphitryon extends Model
     {
         return $this->belongsTo('App\Area', 'area_id', 'id');
     }
+
+    /**
+     * Get the item for Users.
+     */
+    public function users()
+    {
+        return $this->hasMany('App\User', 'amphitryon_id', 'id');
+    }
 }
