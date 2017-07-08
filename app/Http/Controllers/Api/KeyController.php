@@ -17,6 +17,13 @@ class KeyController extends Controller
      */
     public function index()
     {
+        if($keyId = request('id')){
+            $keyLoans = Key::where('id', $keyId)
+                ->with('key_loans')
+                ->first();
+            return $keyLoans;
+        }
+
         return Key::all();
     }
 

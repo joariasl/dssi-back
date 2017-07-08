@@ -20,6 +20,7 @@ class AmphitryonController extends Controller
         if($personRut = request('person_rut')){
             $amphitryons = Amphitryon::where('person_rut', $personRut)
                 ->with('person')
+                ->with('area')
                 ->first();
             return $amphitryons;
         }

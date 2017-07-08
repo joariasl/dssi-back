@@ -31,4 +31,12 @@ class Amphitryon extends Model
     {
         return $this->belongsTo('App\Person', 'person_rut', 'rut');
     }
+
+    /**
+     * Get the item for Area.
+     */
+    public function area()
+    {
+        return $this->belongsTo('App\Area', 'area_id', 'id');
+    }
 }
