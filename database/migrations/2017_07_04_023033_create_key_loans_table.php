@@ -15,15 +15,20 @@ class CreateKeyLoansTable extends Migration
         Schema::create('key_loans', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('key_id')->unsigned();
-            $table->dateTime('date');
-            $table->string('delivery_rut', 9);
-            $table->string('return_rut', 9)->nullable();
+            $table->dateTime('delivery_datetime');
+            $table->dateTime('return_datetime')->nullable();
+            $table->integer('delivery_user_id')->unsigned();
+            $table->integer('delivery_amphitryon_id')->unsigned();
+            $table->integer('return_user_id')->unsigned()->nullable();
+            $table->integer('return_amphitryon_id')->unsigned()->nullable();
             $table->string('return_condition',100)->nullable();
             $table->string('observations',255)->nullable();
             $table->timestamps();
             $table->foreign('key_id')->references('id')->on('keys');
-            $table->foreign('delivery_rut')->references('rut')->on('people');
-            $table->foreign('return_rut')->references('rut')->on('people');
+            $table->foreign('delivery_user_id')->references('id')->on('users');
+            $table->foreign('delivery_amphitryon_id')->references('id')->on('amphitryons');
+            $table->foreign('return_user_id')->references('id')->on('users');
+            $table->foreign('return_amphitryon_id')->references('id')->on('amphitryons');
         });
     }
 

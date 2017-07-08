@@ -15,6 +15,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(PropertiesTableSeeder::class);
+        $this->call(PeopleTableSeeder::class);
+        $this->call(AreasTableSeeder::class);
+        $this->call(PositionsTableSeeder::class);
+        $this->call(AmphitryonsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ChecklistItemGroupsSeeder::class);
         $this->call(ChecklistsSeeder::class);
@@ -23,7 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ChecklistEntriesSeeder::class);
         $this->call(PlacesTableSeeder::class);
         $this->call(KeysTableSeeder::class);
-        $this->call(PeopleTableSeeder::class);
         $this->call(KeyLoansTableSeeder::class);
 
 

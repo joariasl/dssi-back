@@ -6,21 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    protected $fillable = ['rut', 'dv', 'name', 'lastname'];
+    protected $fillable = ['rut', 'dv', 'name', 'lastname', 'birthdate', 'gender'];
 
     /**
-     * Get the item for KeyLoansDeliveries.
+     * Get the item for Amphitryon.
      */
-    public function keyLoanDeliveries()
+    public function amphitryon()
     {
-        return $this->hasMany('App\KeyLoan', 'rut', 'delivery_rut');
+       return $this->hasOne('App\Amphitryon', 'rut', 'person_rut');
     }
 
-    /**
-     * Get the item for KeyLoansReturns.
-     */
-    public function keyLoanReturns()
-    {
-        return $this->hasMany('App\KeyLoan', 'rut', 'return_rut');
-    }
 }
