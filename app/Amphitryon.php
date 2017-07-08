@@ -41,10 +41,10 @@ class Amphitryon extends Model
     }
 
     /**
-     * Get the item for Users.
+     * Get the item for User.
      */
-    public function users()
+    public function user()
     {
-        return $this->hasMany('App\User', 'amphitryon_id', 'id');
+        return $this->hasOne('App\User', 'amphitryon_id', 'id');
     }
 }
