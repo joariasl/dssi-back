@@ -9,10 +9,10 @@ class Area extends Model
     protected $fillable = ['id', 'name'];
 
     /**
-     * Get the item for Amphitryon.
+     * Get the item for Amphitryons.
      */
-    public function amphitryon()
+    public function amphitryons()
     {
-        return $this->hasOne('App\Amphitryon', 'id', 'area_id');
+        return $this->hasMany('App\Amphitryon', 'id', 'area_id');
     }
 }
