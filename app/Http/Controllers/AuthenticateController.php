@@ -45,4 +45,16 @@ class AuthenticateController extends Controller
     public function invalidate(Request $request) {
         JWTAuth::parseToken()->invalidate();
     }
+
+    /**
+     * Log out
+     * Invalidate the token, so user cannot use it anymore
+     * They have to relogin to get a new token
+     *
+     * @param Request $request
+     */
+    public function user(Request $request) {
+        $user = JWTAuth::parseToken()->toUser();
+        return $user;
+    }
 }
