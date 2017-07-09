@@ -23,17 +23,22 @@ class ChecklistRegistryController extends Controller
         if($checklistId = request('checklist_id')){
             $checklistRegistries = ChecklistRegistry::query('checklist_id', $checklistId)
                                     ->with('checklistEntries.checklistItem')
+                                    ->orderBy('date', 'desc')
                                     ->get();
             return $checklistRegistries;
         } elseif ($propertyId = request('property_id')){
-            $checklistRegistries = ChecklistRegistry::whereHas('checklist', function ($query) use ($propertyId) {
+            $checklistRegistriesQuery = ChecklistRegistry::whereHas('checklist', function ($query) use ($propertyId) {
                                         $query->where('property_id', $propertyId);
                                     })
                                     ->with('checklistEntries.checklistItem')
-                                    ->get();
+                                    ->orderBy('date', 'desc');
+            if (request('page'))
+                $checklistRegistries = $checklistRegistriesQuery->paginate();
+            else
+                $checklistRegistries = $checklistRegistriesQuery->get();
             return $checklistRegistries;
         }
-        return ChecklistRegistry::all();
+        return ChecklistRegistry::orderBy('date', 'desc')->all();
     }
 
     /**
