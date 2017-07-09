@@ -50,7 +50,8 @@ class ChecklistController extends Controller
      */
     public function show($id)
     {
-        return Checklist::find($id);
+        return Checklist::with('checklistItems.checklistItemGroup')
+                ->find($id);
     }
 
     /**
