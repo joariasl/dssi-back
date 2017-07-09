@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PositionsTableSeeder::class);
         $this->call(AmphitryonsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
-        $this->call(ChecklistItemGroupsSeeder::class);
         $this->call(ChecklistsSeeder::class);
+        $this->call(ChecklistItemGroupsSeeder::class);
         $this->call(ChecklistItemsSeeder::class);
         $this->call(ChecklistRegistriesSeeder::class);
         $this->call(ChecklistEntriesSeeder::class);

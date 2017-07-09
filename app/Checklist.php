@@ -23,4 +23,12 @@ class Checklist extends Model
     {
         return $this->hasMany('App\ChecklistItem');
     }
+
+    /**
+     * Get the items for ChecklistItemGroups.
+     */
+    public function checklistItemGroups()
+    {
+        return $this->hasMany('App\ChecklistItemGroup');
+    }
 }

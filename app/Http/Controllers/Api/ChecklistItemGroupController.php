@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\api;
 
-use App\ChecklistItem;
 use App\ChecklistItemGroup;
 use Illuminate\Http\Request;
 
@@ -18,20 +17,17 @@ class ChecklistItemGroupController extends Controller
      */
     public function index()
     {
-//        if($checklistId = request('checklist_id')){
-//            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($checklistId) {
-//                                        $query->where('checklist_id', $checklistId);
-//                                    })->get();
-//            return $checklistItemGroups;
-//        } elseif ($propertyId = request('property_id')){
-//            $checklistItemGroups = ChecklistItemGroup::whereHas('checklistItems', function ($query) use ($propertyId) {
-//                                        $query->whereHas('checklist', function ($query) use ($propertyId) {
-//                                            $query->where('property_id', $propertyId);
-//                                        });
-//                                    })
-//                                    ->get();
-//            return $checklistItemGroups;
-//        }
+        if ($checklistId = request('checklist_id')){
+            $checklistItemGroups = ChecklistItemGroup::where('checklist_id', $checklistId)
+                ->get();
+            return $checklistItemGroups;
+        } elseif ($propertyId = request('property_id')){
+            $checklistItemGroups = ChecklistItemGroup::whereHas('checklist', function ($query) use ($propertyId) {
+                    $query->where('property_id', $propertyId);
+                })
+                ->get();
+            return $checklistItemGroups;
+        }
         return ChecklistItemGroup::all();
     }
 
@@ -43,6 +39,11 @@ class ChecklistItemGroupController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'name'         => 'required|string',
+            'checklist_id' => 'required|integer',
+        ]);
+
         ChecklistItemGroup::create($request->all());
         return response()->make(null, 201);
     }
@@ -73,8 +74,9 @@ class ChecklistItemGroupController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'id'     => 'integer',
-            'name'   => 'string',
+            'id'           => 'integer',
+            'name'         => 'string',
+            'checklist_id' => 'integer',
         ]);
 
         $checklistItemGroup = ChecklistItemGroup::find($id);

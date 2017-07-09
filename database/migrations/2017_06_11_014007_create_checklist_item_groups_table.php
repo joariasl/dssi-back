@@ -14,8 +14,10 @@ class CreateChecklistItemGroupsTable extends Migration
     {
         Schema::create('checklist_item_groups', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('checklist_id')->unsigned();
             $table->string('name', 100);
             $table->timestamps();
+            $table->foreign('checklist_id')->references('id')->on('checklists');
         });
     }
 
