@@ -23,6 +23,7 @@ class CreateChecklistRegistriesTable extends Migration
             $table->timestamps();
             $table->foreign('checklist_id')->references('id')->on('checklists');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unique(['date', 'turn', 'checklist_id']);
         });
     }
 
