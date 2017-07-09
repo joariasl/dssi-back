@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Key extends Model
 {
-    protected $fillable = ['id', 'property_id', 'code'];
+    protected $fillable = ['id', 'condition_id', 'property_id', 'code'];
 
     /**
      * Get the item for KeyLoans.
@@ -14,5 +14,13 @@ class Key extends Model
     public function keyLoans()
     {
         return $this->hasMany('App\KeyLoan');
+    }
+
+    /**
+     * Get the item for KeyCondition.
+     */
+    public function keyCondition()
+    {
+        return $this->hasOne('App\KeyCondition', 'id', 'condition_id');
     }
 }

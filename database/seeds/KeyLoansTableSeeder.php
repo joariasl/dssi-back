@@ -21,7 +21,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '1',
             'return_user_id' => '1',
             'return_amphitryon_id' => '1',
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 1',
         ]);
         DB::table($this->table)->insert([
@@ -33,7 +33,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '2',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 2',
         ]);
         DB::table($this->table)->insert([
@@ -45,7 +45,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '3',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 3',
         ]);
         DB::table($this->table)->insert([
@@ -57,7 +57,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '1',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Quebrada',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 4',
         ]);
         DB::table($this->table)->insert([
@@ -69,7 +69,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '2',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Perdida',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 5',
         ]);
         DB::table($this->table)->insert([
@@ -81,7 +81,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '3',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Quebrada',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 6',
         ]);
         DB::table($this->table)->insert([
@@ -93,7 +93,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '1',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'En reparación',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 7',
         ]);
         DB::table($this->table)->insert([
@@ -105,7 +105,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '2',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 8',
         ]);
         DB::table($this->table)->insert([
@@ -117,7 +117,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '3',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 9',
         ]);
         DB::table($this->table)->insert([
@@ -129,7 +129,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '1',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Perdida',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 10',
         ]);
         DB::table($this->table)->insert([
@@ -141,7 +141,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '2',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 11',
         ]);
         DB::table($this->table)->insert([
@@ -153,7 +153,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '3',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'En reparación',
+            'return_status' => 'Disponible',
             'observations' => 'Observación 12',
         ]);
         DB::table($this->table)->insert([
@@ -165,7 +165,7 @@ class KeyLoansTableSeeder extends Seeder
             'delivery_amphitryon_id' => '1',
             'return_user_id' => null,
             'return_amphitryon_id' => null,
-            'return_condition' => 'Operativa',
+            'return_status' => 'Prestada',
             'observations' => 'Observación 13',
         ]);
     }

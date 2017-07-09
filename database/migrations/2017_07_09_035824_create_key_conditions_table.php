@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKeysTable extends Migration
+class CreateKeyConditionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class CreateKeysTable extends Migration
      */
     public function up()
     {
-        Schema::create('keys', function (Blueprint $table) {
+        Schema::create('key_conditions', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('property_id', 3);
-            $table->string('code', 10);
+            $table->string('name', 100);
             $table->timestamps();
-            $table->foreign('property_id')->references('id')->on('properties');
-            $table->unique(['property_id', 'code']);
         });
     }
 
@@ -29,6 +26,6 @@ class CreateKeysTable extends Migration
      */
     public function down()
     {
-        Schema::drop('keys');
+        Schema::drop('key_conditions');
     }
 }

@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ChecklistRegistriesSeeder::class);
         $this->call(ChecklistEntriesSeeder::class);
         $this->call(PlacesTableSeeder::class);
+        $this->call(KeyConditionsTableSeeder::class);
         $this->call(KeysTableSeeder::class);
         $this->call(KeyLoansTableSeeder::class);
 

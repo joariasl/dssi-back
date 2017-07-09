@@ -21,7 +21,7 @@ class CreateKeyLoansTable extends Migration
             $table->integer('delivery_amphitryon_id')->unsigned();
             $table->integer('return_user_id')->unsigned()->nullable();
             $table->integer('return_amphitryon_id')->unsigned()->nullable();
-            $table->string('return_condition',100)->nullable();
+            $table->string('return_status',100)->nullable();
             $table->string('observations',255)->nullable();
             $table->timestamps();
             $table->foreign('key_id')->references('id')->on('keys');
