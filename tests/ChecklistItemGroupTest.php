@@ -39,7 +39,7 @@ class ChecklistItemGroupTest extends TestCase
 
     public function testUpdate()
     {
-        $params = ['name' => 'Grupo2', 'checklist_id' => '1'];
+        $params = ['name' => 'Grupo2'];
         $id = '100';
         $this->json('PUT', $this->baseUrl.'/'.$id, $params)
             ->seeStatusCode(200);
