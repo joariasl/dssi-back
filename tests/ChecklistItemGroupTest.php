@@ -17,7 +17,7 @@ class ChecklistItemGroupTest extends TestCase
 
     public function testCreate()
     {
-        $params = ['id'=>'100', 'name' => 'Grupo1'];
+        $params = ['id'=>'100', 'name' => 'Grupo1', 'checklist_id' => '1'];
         $this->json('POST', $this->baseUrl, $params)
             ->seeStatusCode(201);
         $this->json('GET', $this->baseUrl.'/'.$params['id'])
