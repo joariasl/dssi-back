@@ -39,8 +39,16 @@ class ChecklistRegistryController extends Controller
             }
         }
 
+        // Sort
+        if($sort = json_decode(request('sort'), false)){
+            $field = !empty($sort->field)?$sort->field:'date';
+            $direction = !empty($sort->direction)?$sort->direction:'asc';
+            $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy($field, $direction, true);
+        } else {
+            $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy('date', 'desc');
+        }
+
         $checklistRegistriesQuery = $checklistRegistriesQuery->with('checklistEntries.checklistItem');
-        $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy('date', 'desc');
 
         // Get data
         if (request('page')){
