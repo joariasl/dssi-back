@@ -9,10 +9,10 @@ class KeyCondition extends Model
     protected $fillable = ['id', 'name'];
 
     /**
-     * Get the item for Key.
+     * Get the item for Keys.
      */
-    public function key()
+    public function keys()
     {
-        return $this->belongsTo('App\Key', 'condition_id', 'id');
+        return $this->hasMany('App\Key', 'id', 'condition_id');
     }
 }

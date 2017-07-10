@@ -21,6 +21,6 @@ class Key extends Model
      */
     public function keyCondition()
     {
-        return $this->hasOne('App\KeyCondition', 'id', 'condition_id');
+        return $this->belongsTo('App\KeyCondition', 'condition_id', 'id');
     }
 }
