@@ -37,12 +37,12 @@ class KeyLoansTableSeeder extends Seeder
         DB::table($this->table)->insert([
             'id' => '3',
             'key_id' => '3',
-            'delivery_datetime' => '2017-06-20',
-            'return_datetime' => null,
+            'delivery_datetime' => '2017-07-06 12:33:00',
+            'return_datetime' => '2017-07-06 15:33:00',
             'delivery_user_id' => '1',
             'delivery_amphitryon_id' => '3',
-            'return_user_id' => null,
-            'return_amphitryon_id' => null,
+            'return_user_id' => '1',
+            'return_amphitryon_id' => '1',
             'observations' => 'Observación 3',
         ]);
         DB::table($this->table)->insert([
@@ -155,5 +155,18 @@ class KeyLoansTableSeeder extends Seeder
             'return_amphitryon_id' => null,
             'observations' => 'Observación 13',
         ]);
+        // Repetidos
+        for ($i = 0; $i < 25; $i++) {
+            DB::table($this->table)->insert([
+                'key_id' => '11',
+                'delivery_datetime' => '2017-06-20',
+                'return_datetime' => null,
+                'delivery_user_id' => '1',
+                'delivery_amphitryon_id' => '2',
+                'return_user_id' => null,
+                'return_amphitryon_id' => null,
+                'observations' => null,
+            ]);
+        }
     }
 }
