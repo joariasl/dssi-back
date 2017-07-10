@@ -30,6 +30,15 @@ class ChecklistRegistryController extends Controller
                 $query->where('property_id', $propertyId);
             });
         }
+
+        // Search
+        if($search = json_decode(request('search'), true)){
+            foreach($search as $key => $value) {
+                $checklistRegistriesQuery = $checklistRegistriesQuery
+                    ->where("$key", 'LIKE', "%$value%");
+            }
+        }
+
         $checklistRegistriesQuery = $checklistRegistriesQuery->with('checklistEntries.checklistItem');
         $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy('date', 'desc');
 
