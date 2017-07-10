@@ -17,15 +17,47 @@ class KeyLoanController extends Controller
      */
     public function index()
     {
+        $keyLoansQuery = KeyLoan::query();
         if($propertyId = request('property_id')){
-            $keyLoans = KeyLoan::with('key')
-                            ->with('amphitryonDelivery')
-                            ->with('amphitryonReturn')
-                            ->get();
-            return $keyLoans;
+            $keyLoansQuery = $keyLoansQuery->whereHas('key', function ($query) use ($propertyId) {
+                $query->where('property_id', $propertyId);
+            });
         }
 
-        return KeyLoan::all();
+        // Search
+        if($search = json_decode(request('search'), false)){
+            if(!empty($search->id)){
+                $keyLoansQuery = $keyLoansQuery
+                    ->where('id', 'LIKE', '%'.$search->id.'%');
+            }
+            if(!empty($search->key->code)){
+                $keyLoansQuery = $keyLoansQuery
+                    ->whereHas('key', function ($query) use ($search) {
+                        $query->where('code', 'LIKE', '%'.$search->key->code.'%');
+                    });
+            }
+        }
+
+        // Sort
+        if($sort = json_decode(request('sort'), false)){
+            $field = !empty($sort->field)?$sort->field:'id';
+            $direction = !empty($sort->direction)?$sort->direction:'asc';
+            $keyLoansQuery = $keyLoansQuery->orderBy($field, $direction, true);
+        }
+
+        // Default
+        $keyLoansQuery = $keyLoansQuery
+            ->with('key')
+            ->with('amphitryonDelivery.person')
+            ->with('amphitryonReturn.person');
+
+        // Get data
+        if (request('page')){
+            $keyLoans = $keyLoansQuery->paginate();
+        } else {
+            $keyLoans = $keyLoansQuery->get();
+        }
+        return $keyLoans;
     }
 
     /**
@@ -38,7 +70,6 @@ class KeyLoanController extends Controller
     {
         $this->validate($request, [
             'key_id'                => 'required|integer',
-            'property_id'           => 'required|string|size:3',
             'delivery_user_id'      => 'required|integer',
             'delivery_amphitryon_id'=> 'required|integer',
             'return_user_id'        => 'integer',

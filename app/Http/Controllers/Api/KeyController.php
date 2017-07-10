@@ -18,9 +18,14 @@ class KeyController extends Controller
     public function index()
     {
         if($code = request('code')){
-            $keyLoan = Key::where('code', $code)
+            $key = Key::where('code', $code)
                 ->first();
-            return $keyLoan;
+            return $key;
+        } elseif($propertyId = request('property_id')){
+            $keys = Key::where('property_id', $propertyId)
+                ->with('keyCondition')
+                ->get();
+            return $keys;
         }
         return Key::all();
     }

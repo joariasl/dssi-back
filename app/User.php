@@ -36,4 +36,12 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password'];
+
+    /**
+     * Get the item for Amphitryon.
+     */
+    public function amphitryon()
+    {
+        return $this->belongsTo('App\Amphitryon', 'id', 'amphitryon_id');
+    }
 }
