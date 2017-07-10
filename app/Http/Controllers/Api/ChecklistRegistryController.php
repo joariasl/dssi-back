@@ -20,25 +20,43 @@ class ChecklistRegistryController extends Controller
     public function index()
     {
         /* TODO - Aplicar filtro de checklistId según cheklists pertenecientes a la propiedad usuario, cuando ya se haya identificado. */
+        // Query configuration
+        $checklistRegistriesQuery = ChecklistRegistry::query();
         if($checklistId = request('checklist_id')){
-            $checklistRegistries = ChecklistRegistry::query('checklist_id', $checklistId)
-                                    ->with('checklistEntries.checklistItem')
-                                    ->orderBy('date', 'desc')
-                                    ->get();
-            return $checklistRegistries;
+            $checklistRegistriesQuery = $checklistRegistriesQuery
+                ->where('checklist_id', $checklistId);
         } elseif ($propertyId = request('property_id')){
-            $checklistRegistriesQuery = ChecklistRegistry::whereHas('checklist', function ($query) use ($propertyId) {
-                                        $query->where('property_id', $propertyId);
-                                    })
-                                    ->with('checklistEntries.checklistItem')
-                                    ->orderBy('date', 'desc');
-            if (request('page'))
-                $checklistRegistries = $checklistRegistriesQuery->paginate();
-            else
-                $checklistRegistries = $checklistRegistriesQuery->get();
-            return $checklistRegistries;
+            $checklistRegistriesQuery = $checklistRegistriesQuery->whereHas('checklist', function ($query) use ($propertyId) {
+                $query->where('property_id', $propertyId);
+            });
         }
-        return ChecklistRegistry::orderBy('date', 'desc')->all();
+
+        // Search
+        if($search = json_decode(request('search'), true)){
+            if($search['id']){
+                $checklistRegistriesQuery = $checklistRegistriesQuery
+                    ->where('id', 'LIKE', '%'.$search['id'].'%');
+            }
+        }
+
+        // Sort
+        if($sort = json_decode(request('sort'), false)){
+            $field = !empty($sort->field)?$sort->field:'date';
+            $direction = !empty($sort->direction)?$sort->direction:'asc';
+            $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy($field, $direction, true);
+        } else {
+            $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy('date', 'desc');
+        }
+
+        $checklistRegistriesQuery = $checklistRegistriesQuery->with('checklistEntries.checklistItem');
+
+        // Get data
+        if (request('page')){
+            $checklistRegistries = $checklistRegistriesQuery->paginate();
+        } else {
+            $checklistRegistries = $checklistRegistriesQuery->get();
+        }
+        return $checklistRegistries;
     }
 
     /**

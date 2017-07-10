@@ -35,7 +35,7 @@ class ChecklistEntriesSeeder extends Seeder
             'response' => '1',
             'observations' => 'Observación de retiro de basura que está retirada. Con éste # símbolo, de gato.',
         ]);
-        // For checklist_registry_id = 1
+        // For checklist_registry_id = 2
         DB::table($this->table)->insert([
             'id' => '4',
             'checklist_registry_id' => '2',
@@ -59,7 +59,25 @@ class ChecklistEntriesSeeder extends Seeder
         ]);
         // For checklist_registry_id = 3
         DB::table($this->table)->insert([
-            'id' => '7',
+            'checklist_registry_id' => '3',
+            'checklist_item_id' => '1',
+            'response' => '1',
+            'observations' => null,
+        ]);
+        DB::table($this->table)->insert([
+            'checklist_registry_id' => '3',
+            'checklist_item_id' => '2',
+            'response' => '1',
+            'observations' => null,
+        ]);
+        DB::table($this->table)->insert([
+            'checklist_registry_id' => '3',
+            'checklist_item_id' => '3',
+            'response' => '1',
+            'observations' => null,
+        ]);
+        // For checklist_registry_id = 4
+        DB::table($this->table)->insert([
             'checklist_registry_id' => '3',
             'checklist_item_id' => '4',
             'response' => '1',
