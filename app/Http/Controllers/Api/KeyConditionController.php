@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Key;
+use App\KeyCondition;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class KeyController extends Controller
+class KeyConditionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,47 +16,36 @@ class KeyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $keysQuery = Key::query();
-        if($propertyId = request('property_id')){
-            $keysQuery = $keysQuery->whereHas('keyCondition', function ($query) use ($propertyId) {
+    {   $keyConditionsQuery = KeyCondition::query();
+        if ($propertyId = request('property_id')) {
+            $keyConditionsQuery = $keyConditionsQuery->whereHas('keys', function ($query) use ($propertyId) {
                 $query->where('property_id', $propertyId);
             });
-        } elseif($code = request('code')){
-            $keyCode = Key::where('code', $code)
-                ->first();
-            return $keyCode;
         }
 
         // Sort
         if($sort = json_decode(request('sort'), false)){
             $field = !empty($sort->field)?$sort->field:'id';
             $direction = !empty($sort->direction)?$sort->direction:'asc';
-            $keysQuery = $keysQuery->orderBy($field, $direction, true);
+            $keyConditionsQuery = $keyConditionsQuery->orderBy($field, $direction, true);
         }
-
 
         // Default
-        $keysQuery = $keysQuery
-            ->with('keyCondition');
 
         // Get data
-        if (request('page')){
-            $keys = $keysQuery->paginate();
-        } else {
-            $keys = $keysQuery->get();
-        }
-        return $keys;
+        $keyConditions = $keyConditionsQuery->get();
+        return $keyConditions;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        Key::create($request->all());
+        //
     }
 
     /**
@@ -67,7 +56,7 @@ class KeyController extends Controller
      */
     public function show($id)
     {
-        return Key::find($id);
+        //
     }
 
     /**
@@ -79,8 +68,7 @@ class KeyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $key = Key::find($id);
-        $key->update($request->all());
+        //
     }
 
     /**
@@ -91,6 +79,6 @@ class KeyController extends Controller
      */
     public function destroy($id)
     {
-        Key::destroy($id);
+        //
     }
 }

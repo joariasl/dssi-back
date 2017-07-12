@@ -13,8 +13,8 @@ class AlterKeysTable extends Migration
     public function up()
     {
         Schema::table('keys', function (Blueprint $table) {
-            $table->integer('condition_id')->unsigned();
-            $table->foreign('condition_id')->references('id')->on('key_conditions');
+            $table->integer('key_condition_id')->unsigned();
+            $table->foreign('key_condition_id')->references('id')->on('key_conditions');
         });
     }
 
@@ -27,7 +27,7 @@ class AlterKeysTable extends Migration
     {
         Schema::table('keys', function (Blueprint $table) {
             $table->dropForeign('keys_condition_id_foreign');
-            $table->dropColumn('condition_id');
+            $table->dropColumn('key_condition_id');
         });
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Key extends Model
 {
-    protected $fillable = ['id', 'condition_id', 'property_id', 'code'];
+    protected $fillable = ['id', 'key_condition_id', 'property_id', 'code'];
 
     /**
      * Get the item for KeyLoans.
@@ -21,6 +21,6 @@ class Key extends Model
      */
     public function keyCondition()
     {
-        return $this->belongsTo('App\KeyCondition', 'condition_id', 'id');
+        return $this->belongsTo('App\KeyCondition');
     }
 }

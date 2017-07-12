@@ -13,6 +13,6 @@ class KeyCondition extends Model
      */
     public function keys()
     {
-        return $this->hasMany('App\Key', 'id', 'condition_id');
+        return $this->hasMany('App\Key');
     }
 }
