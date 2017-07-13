@@ -14,10 +14,11 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('parent_module_id')->nullable();
             $table->string('name', 100);
-            $table->unsignedInteger('module_id')->nullable();
+            $table->string('state', 255);
 
-            $table->foreign('module_id')->references('id')->on('modules');
+            $table->foreign('parent_module_id')->references('id')->on('modules');
         });
     }
 

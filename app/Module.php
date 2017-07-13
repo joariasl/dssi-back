@@ -11,7 +11,7 @@ class Module extends Model
      */
     public function childModules()
     {
-        return $this->hasMany('App\Module')->with('childModules');
+        return $this->hasMany('App\Module', 'parent_module_id')->with('childModules');
     }
 
     /**
@@ -19,6 +19,6 @@ class Module extends Model
      */
     public function parentModule()
     {
-        return $this->belongsTo('App\Module');
+        return $this->belongsTo('App\Module', 'parent_module_id');
     }
 }
