@@ -16,7 +16,8 @@ class CreateModulesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('parent_module_id')->nullable();
             $table->string('name', 100);
-            $table->string('state', 255);
+            $table->string('state', 255)->nullable();
+            $table->string('icon', 50)->nullable();
 
             $table->foreign('parent_module_id')->references('id')->on('modules');
         });

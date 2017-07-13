@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KeyConditionsTableSeeder::class);
         $this->call(KeysTableSeeder::class);
         $this->call(KeyLoansTableSeeder::class);
+        $this->call(ModulesTableSeeder::class);
 
 
         Model::reguard();
