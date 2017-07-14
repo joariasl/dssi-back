@@ -60,4 +60,36 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('App\Role');
     }
+
+    /**
+     * Check if User has Permission name.
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermission($permission)
+    {
+        $permissionInUser = $this->permissions()
+            ->where('permissions.name', $permission)
+            ->count();
+        if($permissionInUser > 0){
+            return true;
+        }
+
+        foreach($this->roles()->get() as $role){
+            if($role->hasPermission($permission))
+                return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if User has Role name.
+     * @param $role
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return $this->roles()->where('roles.name', $role)->count() > 0;
+    }
 }

@@ -21,4 +21,14 @@ class Role extends Model
     {
         return $this->belongsToMany('App\User');
     }
+
+    /**
+     * Check if Role has Permission name.
+     * @param $permission
+     * @return bool
+     */
+    public function hasPermission($permission)
+    {
+        return $this->permissions()->where('permissions.name', $permission)->count() > 0;
+    }
 }
