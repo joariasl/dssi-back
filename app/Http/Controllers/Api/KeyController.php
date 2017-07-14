@@ -23,6 +23,7 @@ class KeyController extends Controller
             });
         } elseif($code = request('code')){
             $keyCode = Key::where('code', $code)
+                ->with('keyCondition')
                 ->first();
             return $keyCode;
         }

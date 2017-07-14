@@ -76,7 +76,6 @@ class KeyLoanController extends Controller
             'return_amphitryon_id'  => 'integer',
             'delivery_datetime'     => 'required|date',
             'delivery_datetime'     => 'date',
-            'return_condition'      => 'string|size:100',
             'observations'          => 'string|size:255'
         ]);
 
