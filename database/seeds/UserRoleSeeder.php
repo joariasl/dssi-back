@@ -17,5 +17,9 @@ class UserRoleSeeder extends Seeder
         $user->roles()->attach(Role::where('name', 'access-control.checklist-registry.read')->first()->id);
         $user->roles()->attach(Role::where('name', 'access-control.checklist-registry.write')->first()->id);
         $user->roles()->attach(Role::where('name', 'access-control.checklist.admin')->first()->id);
+
+        $user = User::find(2);
+        $user->roles()->attach(Role::where('name', 'access-control.checklist-registry.read')->first()->id);
+        $user->roles()->attach(Role::where('name', 'access-control.checklist-registry.write')->first()->id);
     }
 }
