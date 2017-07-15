@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
+    public $timestamps  = false;
+
     /**
      * Get the items for Roles.
      */
