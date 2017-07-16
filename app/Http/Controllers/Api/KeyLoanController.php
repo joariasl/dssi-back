@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use JWTAuth;
 
 class KeyLoanController extends Controller
 {
@@ -70,7 +71,7 @@ class KeyLoanController extends Controller
     {
         $this->validate($request, [
             'key_id'                => 'required|integer',
-            'delivery_user_id'      => 'required|integer',
+            'delivery_user_id'      => 'integer',
             'delivery_amphitryon_id'=> 'required|integer',
             'return_user_id'        => 'integer',
             'return_amphitryon_id'  => 'integer',
@@ -79,8 +80,12 @@ class KeyLoanController extends Controller
             'observations'          => 'string|size:255'
         ]);
 
-        KeyLoan::create($request->all());
-        return response()->make(null, 201);
+        $user = JWTAuth::parseToken()->toUser();
+
+        $keyLoan = new KeyLoan($request->all());
+        $keyLoan->delivery_user_id = $user->id;
+        $keyLoan->save();
+        return response()->make($keyLoan, 201);
     }
 
     /**
@@ -91,7 +96,15 @@ class KeyLoanController extends Controller
      */
     public function show($id)
     {
-        //
+        $keyLoan = KeyLoan::with('key.keyCondition')
+            ->with('amphitryonDelivery.person')
+            ->with('amphitryonDelivery.area')
+            ->find($id);
+        if($keyLoan){
+            return $keyLoan;
+        }else{
+            return response()->make(null, 404);
+        }
     }
 
     /**
@@ -103,7 +116,19 @@ class KeyLoanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'key_id'                => 'required|integer',
+            'delivery_user_id'      => 'integer',
+            'delivery_amphitryon_id'=> 'required|integer',
+            'return_user_id'        => 'integer',
+            'return_amphitryon_id'  => 'integer',
+            'delivery_datetime'     => 'required|date',
+            'delivery_datetime'     => 'date',
+            'observations'          => 'string|size:255'
+        ]);
+
+        $keyLoan = KeyLoan::find($id);
+        $keyLoan->update($request->all());
     }
 
     /**
