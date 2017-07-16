@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Gate;
 
 class ChecklistItemController extends Controller
 {
@@ -17,6 +18,9 @@ class ChecklistItemController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('access-control.checklist.read')){
+            abort(403);
+        }
         $request = request();
         $this->validate($request, [
             'checklist_id' => 'integer',
@@ -56,6 +60,9 @@ class ChecklistItemController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
         $request = request();
         $this->validate($request, [
             'checklist_id'            => 'required|integer',
@@ -76,6 +83,9 @@ class ChecklistItemController extends Controller
      */
     public function show($id)
     {
+        if (Gate::denies('access-control.checklist.read')){
+            abort(403);
+        }
         return ChecklistItem::find($id);
     }
 
@@ -88,6 +98,9 @@ class ChecklistItemController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
         $this->validate($request, [
             'id'     => 'integer',
             'name'   => 'string',
@@ -106,6 +119,9 @@ class ChecklistItemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
+        abort(405);// Method Not Allowed
     }
 }
