@@ -29,4 +29,6 @@ $router->group(App::environment('testing')?[]:['middleware' => 'jwt.auth'], func
     Route::resource('key-conditions', 'KeyConditionController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
     Route::resource('key-loans', 'KeyLoanController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+
+    Route::resource('modules', 'ModuleController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 });

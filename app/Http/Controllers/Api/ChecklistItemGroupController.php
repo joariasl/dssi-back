@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Gate;
 
 class ChecklistItemGroupController extends Controller
 {
@@ -17,6 +18,9 @@ class ChecklistItemGroupController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('access-control.checklist.read')){
+            abort(403);
+        }
         if ($checklistId = request('checklist_id')){
             $checklistItemGroups = ChecklistItemGroup::where('checklist_id', $checklistId)
                 ->get();
@@ -39,6 +43,9 @@ class ChecklistItemGroupController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
         $this->validate($request, [
             'name'         => 'required|string',
             'checklist_id' => 'required|integer',
@@ -56,6 +63,9 @@ class ChecklistItemGroupController extends Controller
      */
     public function show($id)
     {
+        if (Gate::denies('access-control.checklist.read')){
+            abort(403);
+        }
         $checklistItemGroup = ChecklistItemGroup::find($id);
         if($checklistItemGroup){
             return $checklistItemGroup;
@@ -73,6 +83,9 @@ class ChecklistItemGroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
         $this->validate($request, [
             'id'           => 'integer',
             'name'         => 'string',
@@ -91,6 +104,9 @@ class ChecklistItemGroupController extends Controller
      */
     public function destroy($id)
     {
+        if (Gate::denies('access-control.checklist.write')){
+            abort(403);
+        }
         ChecklistItemGroup::destroy($id);
         return response()->make(null, 204);
     }

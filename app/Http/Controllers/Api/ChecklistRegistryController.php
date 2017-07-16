@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Gate;
 use JWTAuth;
 
 class ChecklistRegistryController extends Controller
@@ -19,6 +20,9 @@ class ChecklistRegistryController extends Controller
      */
     public function index()
     {
+        if (Gate::denies('access-control.checklist-registry.read')){
+            abort(403);
+        }
         /* TODO - Aplicar filtro de checklistId según cheklists pertenecientes a la propiedad usuario, cuando ya se haya identificado. */
         // Query configuration
         $checklistRegistriesQuery = ChecklistRegistry::query();
@@ -67,6 +71,9 @@ class ChecklistRegistryController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::denies('access-control.checklist-registry.write')){
+            abort(403);
+        }
         $this->validate($request, [
             'checklist_id'         => 'integer',
             'property_id'          => 'string|size:3',
@@ -104,6 +111,9 @@ class ChecklistRegistryController extends Controller
      */
     public function show($id)
     {
+        if (Gate::denies('access-control.checklist-registry.read')){
+            abort(403);
+        }
         $checklistRegistry = ChecklistRegistry::with('checklistEntries.checklistItem.checklistItemGroup')
                                 ->find($id);
         if($checklistRegistry){
@@ -122,7 +132,10 @@ class ChecklistRegistryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (Gate::denies('access-control.checklist-registry.write')){
+            abort(403);
+        }
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -133,6 +146,9 @@ class ChecklistRegistryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (Gate::denies('access-control.checklist-registry.write')){
+            abort(403);
+        }
+        abort(405);// Method Not Allowed
     }
 }

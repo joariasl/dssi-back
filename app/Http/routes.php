@@ -21,4 +21,5 @@ Route::get('/', function () {
 
 Route::post('authenticate', 'AuthenticateController@authenticate');
 Route::post('invalidate', ['uses' => 'AuthenticateController@invalidate', 'middleware' => 'jwt.auth']);
-Route::post('user', ['uses' => 'AuthenticateController@user', 'middleware' => 'jwt.auth']);
+Route::get('user', ['uses' => 'AuthenticateController@user', 'middleware' => 'jwt.auth']);
+Route::get('user/permissions', ['uses' => 'AuthenticateController@permissions', 'middleware' => 'jwt.auth']);

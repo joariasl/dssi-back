@@ -20,5 +20,12 @@ class UsersTableSeeder extends Seeder
             'property_id' => 'TCO',
             'amphitryon_id' => '1',
         ]);
+        DB::table($this->table)->insert([
+            'id' => '2',
+            'username' => 'anovoa',
+            'password' => bcrypt('secret'),
+            'property_id' => 'TCO',
+            'amphitryon_id' => '2',
+        ]);
     }
 }
