@@ -57,4 +57,30 @@ class AuthenticateController extends Controller
         $user = JWTAuth::parseToken()->toUser();
         return $user;
     }
+
+    /**
+     * Get all permissions for user
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function permissions(Request $request) {
+        $user = JWTAuth::parseToken()->toUser();
+        $permissions=[];
+        // Permissions in user
+        foreach($user->permissions()->get() as $permission){
+            if(!in_array($permission->name, $permissions)){
+                $permissions[]=$permission->name;
+            }
+        }
+        // Permissions in roles for users
+        foreach($user->roles()->get() as $role){
+            foreach($role->permissions()->get() as $permission){
+                if(!in_array($permission->name, $permissions)){
+                    $permissions[]=$permission->name;
+                }
+            }
+        }
+        return $permissions;
+    }
 }

@@ -46,7 +46,7 @@ class User extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Get the items for Roles.
+     * Get the items for Permissions.
      */
     public function permissions()
     {
