@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Amphitryon;
+use App\KeyCondition;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AmphitryonController extends Controller
+class KeyConditionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,31 +16,18 @@ class AmphitryonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $amphitryonsQuery = Amphitryon::query();
+    {   $keyConditionsQuery = KeyCondition::query();
 
-        // Search
-        if($search = json_decode(request('search'), true)){
-            if(!empty($search['person_rut'])){
-                $personRut = $search['person_rut'];
-                $amphitryonsQuery = $amphitryonsQuery->where('person_rut', 'LIKE', '%'.$personRut.'%');
-            }
-        }
+        // Sort
+        $keyConditionsQuery = $keyConditionsQuery->orderBy('id', 'asc', true);
 
         // Default
-        $amphitryonsQuery = $amphitryonsQuery
-            ->with('person')
-            ->with('area');
 
         // Get data
-        if (request('page')){
-            $amphitryons = $amphitryonsQuery->paginate();
-        } else {
-            $amphitryons = $amphitryonsQuery->get();
-        }
-        return $amphitryons;
+        $keyConditions = $keyConditionsQuery->get();
+        return $keyConditions;
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -49,7 +36,7 @@ class AmphitryonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -60,7 +47,7 @@ class AmphitryonController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -72,7 +59,7 @@ class AmphitryonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -83,6 +70,6 @@ class AmphitryonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 }

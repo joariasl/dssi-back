@@ -16,18 +16,41 @@ class KeyController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        if($code = request('code')){
-            $key = Key::where('code', $code)
-                ->first();
-            return $key;
-        } elseif($propertyId = request('property_id')){
-            $keys = Key::where('property_id', $propertyId)
-                ->with('keyCondition')
-                ->get();
-            return $keys;
+    {   $keysQuery = Key::query();
+        if($propertyId = request('property_id')){
+            $keysQuery = $keysQuery->where('property_id', $propertyId);
         }
-        return Key::all();
+
+        // Search
+        if($search = json_decode(request('search'), true)){
+            if(!empty($search['code'])){
+                $keyCode = $search['code'];
+                $keysQuery = $keysQuery->where('code', 'LIKE', '%'.$keyCode.'%');
+            }
+            if(!empty($search['key_condition_id'])){
+                $keyConditionId = $search['key_condition_id'];
+                $keysQuery = $keysQuery->where('key_condition_id', $keyConditionId);
+            }
+        }
+
+        // Sort
+        if($sort = json_decode(request('sort'), false)){
+            $field = !empty($sort->field)?$sort->field:'code';
+            $direction = !empty($sort->direction)?$sort->direction:'asc';
+            $keysQuery = $keysQuery->orderBy($field, $direction, true);
+        }
+
+        // Default
+        $keysQuery = $keysQuery
+            ->with('keyCondition');
+
+        // Get data
+        if (request('page')){
+            $keys = $keysQuery->paginate();
+        } else {
+            $keys = $keysQuery->get();
+        }
+        return $keys;
     }
 
     /**

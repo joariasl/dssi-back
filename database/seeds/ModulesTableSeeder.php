@@ -36,7 +36,7 @@ class ModulesTableSeeder extends Seeder
         ]));
         $module->childModules()->save(new Module([
             'name' => 'Llaves',
-            'state' => 'access-control.key-loans.view',
+            'state' => 'access-control.key-loans.key-loans',
         ]));
 
 

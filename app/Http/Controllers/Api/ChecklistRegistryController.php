@@ -37,7 +37,7 @@ class ChecklistRegistryController extends Controller
 
         // Search
         if($search = json_decode(request('search'), true)){
-            if($search['id']){
+            if(!empty($search['id'])){
                 $checklistRegistriesQuery = $checklistRegistriesQuery
                     ->where('id', 'LIKE', '%'.$search['id'].'%');
             }
