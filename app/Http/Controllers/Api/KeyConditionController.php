@@ -17,18 +17,9 @@ class KeyConditionController extends Controller
      */
     public function index()
     {   $keyConditionsQuery = KeyCondition::query();
-        if ($propertyId = request('property_id')) {
-            $keyConditionsQuery = $keyConditionsQuery->whereHas('keys', function ($query) use ($propertyId) {
-                $query->where('property_id', $propertyId);
-            });
-        }
 
         // Sort
-        if($sort = json_decode(request('sort'), false)){
-            $field = !empty($sort->field)?$sort->field:'id';
-            $direction = !empty($sort->direction)?$sort->direction:'asc';
-            $keyConditionsQuery = $keyConditionsQuery->orderBy($field, $direction, true);
-        }
+        $keyConditionsQuery = $keyConditionsQuery->orderBy('id', 'asc', true);
 
         // Default
 
@@ -45,7 +36,7 @@ class KeyConditionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -56,7 +47,7 @@ class KeyConditionController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -68,7 +59,7 @@ class KeyConditionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 
     /**
@@ -79,6 +70,6 @@ class KeyConditionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 }

@@ -18,23 +18,22 @@ class KeyController extends Controller
     public function index()
     {   $keysQuery = Key::query();
         if($propertyId = request('property_id')){
-            $keysQuery = $keysQuery->whereHas('keyCondition', function ($query) use ($propertyId) {
-                $query->where('property_id', $propertyId);
-            });
-        } elseif($code = request('code')){
-            $keyCode = Key::where('code', $code)
-                ->with('keyCondition')
-                ->first();
-            return $keyCode;
+            $keysQuery = $keysQuery->where('property_id', $propertyId);
+        }
+
+        // Search
+        if($search = json_decode(request('search'), true)){
+            if($keyCode = $search['code']){
+                $keysQuery = $keysQuery->where('code', 'LIKE', '%'.$keyCode.'%');
+            }
         }
 
         // Sort
         if($sort = json_decode(request('sort'), false)){
-            $field = !empty($sort->field)?$sort->field:'id';
+            $field = !empty($sort->field)?$sort->field:'code';
             $direction = !empty($sort->direction)?$sort->direction:'asc';
             $keysQuery = $keysQuery->orderBy($field, $direction, true);
         }
-
 
         // Default
         $keysQuery = $keysQuery
