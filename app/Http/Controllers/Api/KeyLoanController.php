@@ -99,6 +99,8 @@ class KeyLoanController extends Controller
         $keyLoan = KeyLoan::with('key.keyCondition')
             ->with('amphitryonDelivery.person')
             ->with('amphitryonDelivery.area')
+            ->with('amphitryonReturn.person')
+            ->with('amphitryonReturn.area')
             ->find($id);
         if($keyLoan){
             return $keyLoan;
@@ -130,10 +132,11 @@ class KeyLoanController extends Controller
         $user = JWTAuth::parseToken()->toUser();
 
         $keyLoan = KeyLoan::find($id);
-        if (!request('return_user_id')){
-            $keyLoan->return_user_id = $user->id;
+        $toSave = $request->all();
+        if (empty($toSave['return_user_id'])){
+            $toSave['return_user_id'] = $user->id;
         }
-        $keyLoan->update($request->all());
+        $keyLoan->update($toSave);
     }
 
     /**
@@ -144,6 +147,6 @@ class KeyLoanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(405);// Method Not Allowed
     }
 }
