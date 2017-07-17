@@ -26,7 +26,7 @@ class AlterKeysTable extends Migration
     public function down()
     {
         Schema::table('keys', function (Blueprint $table) {
-            $table->dropForeign('keys_condition_id_foreign');
+            $table->dropForeign('keys_key_condition_id_foreign');
             $table->dropColumn('key_condition_id');
         });
     }
