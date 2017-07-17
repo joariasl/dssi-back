@@ -77,7 +77,7 @@ class KeyLoanController extends Controller
             'return_amphitryon_id'  => 'integer',
             'delivery_datetime'     => 'required|date',
             'delivery_datetime'     => 'date',
-            'observations'          => 'string|size:255'
+            'observations'          => 'string|max:255'
         ]);
 
         $user = JWTAuth::parseToken()->toUser();
@@ -118,16 +118,21 @@ class KeyLoanController extends Controller
     {
         $this->validate($request, [
             'key_id'                => 'required|integer',
-            'delivery_user_id'      => 'integer',
+            'delivery_user_id'      => 'required|integer',
             'delivery_amphitryon_id'=> 'required|integer',
             'return_user_id'        => 'integer',
-            'return_amphitryon_id'  => 'integer',
+            'return_amphitryon_id'  => 'required|integer',
             'delivery_datetime'     => 'required|date',
-            'delivery_datetime'     => 'date',
-            'observations'          => 'string|size:255'
+            'return_datetime'       => 'required|date',
+            'observations'          => 'string|max:255'
         ]);
 
+        $user = JWTAuth::parseToken()->toUser();
+
         $keyLoan = KeyLoan::find($id);
+        if (!request('return_user_id')){
+            $keyLoan->return_user_id = $user->id;
+        }
         $keyLoan->update($request->all());
     }
 
