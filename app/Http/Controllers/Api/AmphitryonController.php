@@ -17,15 +17,28 @@ class AmphitryonController extends Controller
      */
     public function index()
     {
-        if($personRut = request('person_rut')){
-            $amphitryons = Amphitryon::where('person_rut', $personRut)
-                ->with('person')
-                ->with('area')
-                ->first();
-            return $amphitryons;
+        $amphitryonsQuery = Amphitryon::query();
+
+        // Search
+        if($search = json_decode(request('search'), true)){
+            if(!empty($search['person_rut'])){
+                $personRut = $search['person_rut'];
+                $amphitryonsQuery = $amphitryonsQuery->where('person_rut', 'LIKE', '%'.$personRut.'%');
+            }
         }
 
-        return Amphitryon::all();
+        // Default
+        $amphitryonsQuery = $amphitryonsQuery
+            ->with('person')
+            ->with('area');
+
+        // Get data
+        if (request('page')){
+            $amphitryons = $amphitryonsQuery->paginate();
+        } else {
+            $amphitryons = $amphitryonsQuery->get();
+        }
+        return $amphitryons;
     }
     
     /**
