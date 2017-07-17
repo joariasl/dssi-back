@@ -23,8 +23,13 @@ class KeyController extends Controller
 
         // Search
         if($search = json_decode(request('search'), true)){
-            if($keyCode = $search['code']){
+            if(!empty($search['code'])){
+                $keyCode = $search['code'];
                 $keysQuery = $keysQuery->where('code', 'LIKE', '%'.$keyCode.'%');
+            }
+            if(!empty($search['key_condition_id'])){
+                $keyConditionId = $search['key_condition_id'];
+                $keysQuery = $keysQuery->where('key_condition_id', $keyConditionId);
             }
         }
 
