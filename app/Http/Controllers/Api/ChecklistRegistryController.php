@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Gate;
 use JWTAuth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ChecklistRegistryController extends Controller
 {
@@ -150,5 +151,44 @@ class ChecklistRegistryController extends Controller
             abort(403);
         }
         abort(405);// Method Not Allowed
+    }
+
+    /**
+     * Return the index resource on Excel.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function excel($id)
+    {
+        if (Gate::denies('access-control.checklist-registry.read')){
+            abort(403);
+        }
+        $checklistRegistry = ChecklistRegistry::with('checklistEntries.checklistItem.checklistItemGroup')
+            ->find($id);;
+        Excel::create('Checklist', function($excel) use ($checklistRegistry) {
+
+            $excel->sheet('Excel sheet', function($sheet) use ($checklistRegistry) {
+
+                $sheet->appendRow(array(
+                    'Folio', $checklistRegistry->id
+                ));
+                $sheet->appendRow(array(
+                    'Fecha', $checklistRegistry->date, null, 'Turno', $checklistRegistry->turn
+                ));
+                $sheet->appendRow(array(
+                    'Grupo', 'Item', 'Estado', 'Observaciones'
+                ));
+                foreach ($checklistRegistry->checklistEntries as $checklistEntry){
+                    $checklistItem = $checklistEntry->checklistItem;
+                    $checklistItemGroup = $checklistItem->checklistItemGroup;
+                    $sheet->appendRow(array(
+                        $checklistItemGroup->name, $checklistItem->name, $checklistItem->status===1?'SI':'NO', $checklistEntry->observations
+                    ));
+                }
+
+            });
+
+        })->export('xlsx');
     }
 }

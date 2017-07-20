@@ -23,6 +23,7 @@ $router->group(App::environment('testing')?[]:['middleware' => 'jwt.auth'], func
     Route::resource('checklist-items', 'ChecklistItemController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
     Route::resource('checklist-registries', 'ChecklistRegistryController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
+    Route::get('checklist-registries/{id}/xlsx', 'ChecklistRegistryController@excel');
 
     Route::resource('keys', 'KeyController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
 
