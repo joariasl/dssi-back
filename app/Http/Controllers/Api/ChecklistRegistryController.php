@@ -156,10 +156,62 @@ class ChecklistRegistryController extends Controller
     /**
      * Return the index resource on Excel.
      *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexExcel()
+    {
+        if (Gate::denies('access-control.checklist-registry.read')){
+            abort(403);
+        }
+
+        // Query
+        $checklistRegistriesQuery = ChecklistRegistry::query();
+        if($checklistId = request('checklist_id')){
+            $checklistRegistriesQuery = $checklistRegistriesQuery
+                ->where('checklist_id', $checklistId);
+        } elseif ($propertyId = request('property_id')){
+            $checklistRegistriesQuery = $checklistRegistriesQuery->whereHas('checklist', function ($query) use ($propertyId) {
+                $query->where('property_id', $propertyId);
+            });
+        }
+
+        // Sort
+        $checklistRegistriesQuery = $checklistRegistriesQuery->orderBy('date', 'desc');
+
+        $checklistRegistriesQuery = $checklistRegistriesQuery->with('checklistEntries.checklistItem');
+
+        // Get data
+        $checklistRegistries = $checklistRegistriesQuery->get();
+
+        Excel::create('Checklist', function($excel) use ($checklistRegistries) {
+
+            $excel->sheet('Excel sheet', function($sheet) use ($checklistRegistries) {
+
+                $sheet->appendRow(array(
+                    'Folio', 'Fecha', 'Turno', 'Grupo', 'Item', 'Estado', 'Observaciones'
+                ));
+                foreach ($checklistRegistries as $checklistRegistry){
+                    foreach ($checklistRegistry->checklistEntries as $checklistEntry){
+                        $checklistItem = $checklistEntry->checklistItem;
+                        $checklistItemGroup = $checklistItem->checklistItemGroup;
+                        $sheet->appendRow(array(
+                            $checklistRegistry->id, $checklistRegistry->date, $checklistRegistry->turn, $checklistItemGroup->name, $checklistItem->name, $checklistItem->status===1?'SI':'NO', $checklistEntry->observations
+                        ));
+                    }
+                }
+
+            });
+
+        })->export('xlsx');
+    }
+
+    /**
+     * Return the index resource on Excel.
+     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function excel($id)
+    public function showExcel($id)
     {
         if (Gate::denies('access-control.checklist-registry.read')){
             abort(403);
